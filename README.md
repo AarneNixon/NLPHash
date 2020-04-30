@@ -13,4 +13,5 @@ hcrack.py is the tool itself. Absent any arguments, it will inform you of proper
 # Test
   Once you have python ready, pip installed the dependencies and the files downloaded into one directory, the test command using word-tokenization to search for a one-word password is:
   
-  python hcrack.py output.pdf possible_passwords
+	python hcrack.py md5 md5hash W possible_passwords
+	python hcrack.py pdf output.pdf W possible_passwords
