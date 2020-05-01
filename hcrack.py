@@ -216,7 +216,7 @@ if len(sys.argv) > 2:
 #						print('tested ' + j + ' which hashed to ' + rez)
 else:
 #	print 'usage: python hcrack.py target_file source_file'
-	print 'usage: python hcrack.py [format] target_file [nlp options] source_file'
+	print 'usage: python hcrack.py [format] target_file [nlp options] source_file "prefix" "postfix"'
 #	print 'Prefix and Suffix are prepended/appended respectively to every attempt, type  for empty prefix'
 	print '[format] list:'
 	print '		pdf'
