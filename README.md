@@ -24,3 +24,8 @@ hcrack.py is the tool itself. Absent any arguments, it will inform you of proper
   The test command for named entity recognition (only making attempts from names of people/organizations/etc from target file)
 
 	python hcrack.py sha256 sha256hashNER NW namedEntity
+
+  The S letter is a modifier that removes all the common but unlikely "stopwords" such as the/a/and before hashing, to save time hashing. Compare the output of these:
+
+	python hcrack.py sha256 sha256hash W possible_passwords
+	python hcrack.py sha256 sha256hash WS possible_passwords
