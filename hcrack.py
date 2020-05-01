@@ -27,7 +27,6 @@ nltk.download('stopwords')
 #brown.words()
 #from nltk.book import *
 #from nltk.tokenize import sent_tokenize, word_tokenize
-#text = "t e x t  t e s t."
 stop_words = set(stopwords.words('english'))
 if len(sys.argv) > 2:
 	print 'format', sys.argv[1]
@@ -59,6 +58,12 @@ if len(sys.argv) > 2:
 		elif char == 'S':
 			print 'Stopwords will be automatically ignored'
 			useSTOP=True;
+#	print(sys.argv[5][1:][:-1])
+#	print(sys.argv[6][1:][:-1])
+#	print(sys.argv[5])
+#	print(sys.argv[6])
+	prefix=sys.argv[5]
+	postfix=sys.argv[6]
 	found_answer = 0
 	if format == "pdf":
 		search=[]
@@ -89,36 +94,36 @@ if len(sys.argv) > 2:
 			if useLemmatize:
 				if found_answer == 1:
 					break
-				tgt_pdf.decrypt(j)
+				tgt_pdf.decrypt(prefix + j + postfix)
 				try:
 					x=tgt_pdf.getNumPages()
-					print('solved, answer is: ' + j)
+					print('solved, answer is: ' + prefix + j + postfix)
 					found_answer=1
 					break
 				except:
-					print('tested ' + j)
+					print('tested ' + prefix + j + postfix)
 			elif usePOS:
 				if found_answer == 1:
 					break
-				tgt_pdf.decrypt(j)
+				tgt_pdf.decrypt(prefix + j + postfix)
 				try:
 					x=tgt_pdf.getNumPages()
-					print('solved, answer is: ' + j)
+					print('solved, answer is: ' + prefix + j + postfix)
 					found_answer=1
 					break
 				except:
-					print('tested ' + j)
+					print('tested ' + prefix + j + postfix)
 			else:
 				if found_answer == 1:
 					break
-				tgt_pdf.decrypt(j)
+				tgt_pdf.decrypt(prefix + j + postfix)
 				try:
 					x=tgt_pdf.getNumPages()
-					print('solved, answer is: ' + j)
+					print('solved, answer is: ' + prefix + j + postfix)
 					found_answer=1
 					break
 				except:
-					print('tested ' + j)
+					print('tested ' + prefix + j + postfix)
 	elif format == "md5" or format == "sha256" or format == "sha512" or format == "blowfish":
 		hashfile = open(target_file, "r")
 		k = hashfile.read().strip()
@@ -137,17 +142,19 @@ if len(sys.argv) > 2:
 			for i in fileinput.input(source_file):
 				for j in nltk.word_tokenize(i):
 					search.append(j)
+#		if usePOS and useNER:
+#		if usePOS and not useNER:
 		if useSTOP:
 			temp = [x for x in search if not x in stop_words]
 			search = temp
 		for j in search:
 			if useTokenize:
 				if format == "md5":
-					rez = hashlib.md5(j).hexdigest()
+					rez = hashlib.md5(prefix + j + postfix).hexdigest()
 				elif format == "sha256":
-					rez = hashlib.sha256(j).hexdigest()
+					rez = hashlib.sha256(prefix + j + postfix).hexdigest()
 				elif format == "sha512":
-					rez = hashlib.sha512(j).hexdigest()
+					rez = hashlib.sha512(prefix + j + postfix).hexdigest()
 #					elif format == "blowfish":
 #						rez = bcrypt.using(rounds=14, ident="2y").hash("password")
 				else:
@@ -156,18 +163,18 @@ if len(sys.argv) > 2:
 				if found_answer == 1:
 					break
 				if k == rez:
-					print('solved, answer is: ' + j)
+					print('solved, answer is: ' + prefix + j + postfix)
 					found_answer=1
 				else:
-					print('tested ' + j + ' which hashed to ' + rez)
+					print('tested ' + prefix + j + postfix + ' which hashed to ' + rez)
 #						print('tested ' + j + ' which hashed to ' + rez + '. vs' + k + '.')
 			if useLemmatize:
 				if format == "md5":
-					rez = hashlib.md5(j).hexdigest()
+					rez = hashlib.md5(prefix + j + postfix).hexdigest()
 				elif format == "sha256":
-					rez = hashlib.sha256(j).hexdigest()
+					rez = hashlib.sha256(prefix + j + postfix).hexdigest()
 				elif format == "sha512":
-					rez = hashlib.sha512(j).hexdigest()
+					rez = hashlib.sha512(prefix + j + postfix).hexdigest()
 #					elif format == "blowfish":
 #						bcrypt.using(rounds=14, ident="2y").hash(j)
 				else:
@@ -175,17 +182,17 @@ if len(sys.argv) > 2:
 				if found_answer == 1:
 					break
 				if k == rez:
-					print('solved, answer is: ' + j)
+					print('solved, answer is: ' + prefix + j + postfix)
 					found_answer=1
 				else:
-					print('tested ' + j + ' which hashed to ' + rez)
+					print('tested ' + prefix + j + postfix + ' which hashed to ' + rez)
 			elif usePOS:
 				if format == "md5":
-					rez = hashlib.md5(j).hexdigest()
+					rez = hashlib.md5(prefix + j + postfix).hexdigest()
 				elif format == "sha256":
-					rez = hashlib.sha256(j).hexdigest()
+					rez = hashlib.sha256(prefix + j + postfix).hexdigest()
 				elif format == "sha512":
-					rez = hashlib.sha512(j).hexdigest()
+					rez = hashlib.sha512(prefix + j + postfix).hexdigest()
 #					elif format == "blowfish":
 #						bcrypt.using(rounds=14, ident="2y").hash(j)
 				else:
@@ -193,10 +200,10 @@ if len(sys.argv) > 2:
 				if found_answer == 1:
 					break
 				if k == rez:
-					print('solved, answer is: ' + j)
+					print('solved, answer is: ' + prefix + j + postfix)
 					found_answer=1
 				else:
-					print('tested ' + j + ' which hashed to ' + rez)
+					print('tested ' + prefix + j + postfix + ' which hashed to ' + rez)
 			else:
 				pass
 #					rez = hashlib.md5(j).hexdigest()
