@@ -3,7 +3,7 @@ Using Natural Language Processing tools to aid password recovery across formats 
 
 # Dependencies
 
-PyPDF2, nltk, passlib, bcrypt. All are available via pip.
+PyPDF2, nltk, passlib, bcrypt, numpy. All are available via pip.
 
 # Descriptions
 
@@ -20,3 +20,7 @@ hcrack.py is the tool itself. Absent any arguments, it will inform you of proper
 	python hcrack.py md5 md5hash W possible_passwords
 	python hcrack.py sha512 sha512hash W possible_passwords
 	python hcrack.py sha256 sha256hash W possible_passwords
+
+  The test command for named entity recognition (only making attempts from names of people/organizations/etc from target file)
+
+	python hcrack.py sha256 sha256hashNER NW namedEntity
